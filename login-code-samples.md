@@ -3,24 +3,29 @@
 ```javascript
 const axios = require('axios');
 
-const apiUrl = 'https://api.example.com/data';
-const authToken = 'your_auth_token';
-
-// Basic Authorization Header
-const headers = {
-  'Authorization': `Bearer ${authToken}`,
-  'Content-Type': 'application/json', // Adjust content type as needed
-};
-
-// Making GET request
-axios.get(apiUrl, { headers })
+// Step 1: Login
+axios.post('https://challenger.code100.dev/login', {
+  email: 'any',
+  password: 'any'
+})
   .then(response => {
-    // Handle the API response
-    console.log(response.data);
+    const token = response.data.token;
+
+    // Step 2: Call Authenticated Endpoint
+    axios.get('http://challenger.code100.dev/testauthroute', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(authResponse => {
+        console.log(authResponse.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   })
   .catch(error => {
-    // Handle errors
-    console.error('Error:', error.message);
+    console.error(error);
   });
 
 ```
