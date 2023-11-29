@@ -4,6 +4,11 @@
 ```
 https://challenger.code100.dev
 ```
+
+## Swagger Documentation
+```
+https://challenger.code100.dev/doc/
+```
 ## Login
 
 In order to request the coding puzzle or submit the solution, you first need to retrieve the JSON Web Token by logging into the API:
