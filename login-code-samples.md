@@ -121,53 +121,7 @@ auth_response = requests.get("http://challenger.code100.dev/testauthroute", head
 print(auth_response.json())
 ```
 
-# 3. Java
-
-```java
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.io.OutputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-public class RestApiExample {
-
-    public static void main(String[] args) {
-        try {
-            // Step 1: Login
-            URL loginUrl = new URL("https://challenger.code100.dev/login");
-            HttpURLConnection loginConnection = (HttpURLConnection) loginUrl.openConnection();
-            loginConnection.setRequestMethod("POST");
-            loginConnection.setDoOutput(true);
-            OutputStream loginOutputStream = loginConnection.getOutputStream();
-            loginOutputStream.write("{\"email\":\"any\",\"password\":\"any\"}".getBytes());
-            loginOutputStream.flush();
-            loginOutputStream.close();
-
-            BufferedReader loginReader = new BufferedReader(new InputStreamReader(loginConnection.getInputStream()));
-            String loginResponse = loginReader.readLine();
-            loginReader.close();
-
-            String token = loginResponse.split("\"")[3];
-
-            // Step 2: Call Authenticated Endpoint
-            URL authUrl = new URL("http://challenger.code100.dev/testauthroute");
-            HttpURLConnection authConnection = (HttpURLConnection) authUrl.openConnection();
-            authConnection.setRequestMethod("GET");
-            authConnection.setRequestProperty("Authorization", "Bearer " + token);
-
-            BufferedReader authReader = new BufferedReader(new InputStreamReader(authConnection.getInputStream()));
-            String authResponse = authReader.readLine();
-            authReader.close();
-
-            System.out.println(authResponse);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
-# 4. PHP
+# 3. PHP
 ```php
 <?php
 
@@ -196,7 +150,7 @@ $authResult = file_get_contents("http://challenger.code100.dev/testauthroute", f
 echo $authResult;
 ?>
 ```
-# 5. C++
+# 4. C++
 ```cpp
 #include <iostream>
 #include <curl/curl.h>
@@ -236,7 +190,7 @@ int main() {
 }
 ```
 
-# 6. C#
+# 5. C#
 ```c#
 using System;
 using System.Net.Http;
@@ -263,7 +217,7 @@ class Program
     }
 }
 ```
-# 7. Ruby
+# 6. Ruby
 ```ruby
 require 'net/http'
 require 'json'
@@ -283,7 +237,7 @@ request = Net::HTTP::Get.new(uri.path, {'Authorization' => "Bearer #{token}"})
 response = http.request(request)
 puts response.body
 ```
-# 8. Rust
+# 7. Rust
 ```rust
 use reqwest;
 
